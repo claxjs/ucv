@@ -1,0 +1,8 @@
+# Dependencies
+node_modules
+
+# Setting
+
+# Build Outputs
+build
+dist
