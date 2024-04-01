@@ -51,8 +51,8 @@ export interface UCVOptions<
 }
 
 export type GlobalProps<Base, Vars> =
-  | VarProps<Vars> & ClassProps<Base>
-  | ClassProps<Base>
+  | VarProps<Vars> & ClassProps<Partial<Base>>
+  | ClassProps<Partial<Base>>
 
 export type SlotProps<Vars> =
   | VarProps<Vars> & ClassProps<Clax>
