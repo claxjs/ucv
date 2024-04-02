@@ -32,11 +32,151 @@ pnpm install @claxjs/ucv
 
 ## <a name="usage">🎯 使用</a>
 
-待添加
+会不断添加详细使用文档，目前只是基础使用部分(若方便的话，朋友们可以先看测试用例)
+
+细节方面还需要补充 💜
+
+### Slot(插槽)
+
+``` javascript
+const clax = ucv({
+  base: {
+    root: 'base-root-style-1',
+    title: 'base-title-style-1'
+  }
+})
+
+const { root, title } = clax()
+
+/**
+ * root() => 'base-root-style-1'
+ * title() => 'base-title-style-1'
+ */
+```
+
+### Vars(变量)
+
+``` javascript
+const clax = ucv({
+  base: {
+    root: 'base-root-style-1',
+  },
+  vars: {
+    color: {
+      primary: {
+        root: 'vars-color-primary-root-style-1'
+      },
+    },
+    disabled: {
+      true: {
+        root: 'vars-disabled-true-root-style-1'
+      }
+    }
+  }
+})
+
+const { root } = clax({ color: 'primary', disabled: true })
+/**
+ * root() => 'base-root-style-1 vars-color-primary-root-style-1 vars-disabled-true-root-style-1'
+ */
+```
+
+### DefaultProps(默认属性)
+
+``` javascript
+const clax = ucv({
+  base: {
+    root: 'base-root-style-1',
+  },
+  vars: {
+    color: {
+      primary: {
+        root: 'vars-color-primary-root-style-1',
+      },
+    },
+    disabled: {
+      true: {
+        root: 'vars-disabled-true-root-style-1',
+      },
+    },
+  },
+  defaultProps: {
+    color: 'primary',
+    disabled: true,
+  },
+})
+
+const { root } = clax()
+/**
+ * root() => 'base-root-style-1 vars-color-primary-root-style-1 vars-disabled-true-root-style-1'
+ */
+```
+
+### Combos(组合变量)
+
+``` javascript
+const clax = ucv({
+  base: {
+    root: 'base-root-style-1',
+    title: 'base-title-style-1',
+  },
+  vars: {
+    color: {
+      primary: {
+        root: 'vars-color-primary-root-style-1',
+      },
+      secondary: {
+        root: 'vars-color-secondary-root-style-1',
+        title: 'vars-color-secondary-title-style-1',
+      },
+    },
+    disabled: {
+      true: {
+        root: 'vars-disabled-true-root-style-1',
+      },
+      false: {
+        root: 'vars-disabled-false-root-style-1',
+        title: 'vars-disabled-false-title-style-1',
+      },
+    },
+  },
+  combosVars: [
+    {
+      color: 'primary',
+      disabled: true,
+      class: {
+        root: 'combos-vars-color-primary-disabled-true-root-style-1',
+      },
+    },
+    {
+      color: ['primary', 'secondary'],
+      disabled: false,
+      class: {
+        root: 'combos-vars-color-primary-disabled-false-root-style-1',
+      },
+    },
+  ],
+  defaultProps: {
+    color: 'primary',
+    disabled: true,
+  },
+})
+
+const { root } = clax()
+const { title } = clax({ color: 'secondary', disabled: false })
+
+/**
+ * root() => 'base-root-style-1 vars-color-primary-root-style-1 vars-disabled-true-root-style-1 combos-vars-color-primary-disabled-true-root-style-1'
+ *
+ * root({ color: 'primary', disabled: false }) => 'base-root-style-1 vars-color-primary-root-style-1 vars-disabled-false-root-style-1 combos-vars-color-primary-disabled-false-root-style-1'
+ *
+ * title() => 'base-title-style-1 vars-color-secondary-title-style-1 vars-disabled-false-title-style-1'
+ */
+```
 
 ## <a name="todo">👀 待办</a>
 
-- [ ] 添加语法糖
+- [ ] 添加插槽语法糖
 - [ ] 解决工具类冲突
 
 ## <a name="why">❓ WHY</a>
