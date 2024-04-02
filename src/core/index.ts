@@ -68,26 +68,18 @@ export function ucv<
   const getVarsClass = (varProps: VarProps<Vars>, baseKey: string) => {
     const varsClass: Clax = []
 
-    const varKeyStr = `${Object.keys(varProps).join('-')}-vars`
-    const typeNameStr = Object.values(varProps).join('-')
+    for (const [varKey, typeName] of Object.entries(varProps)) {
+      if (isUndef(typeName))
+        break
 
-    if (!VarsMap.has(varKeyStr, typeNameStr)) {
-      for (const [varKey, typeName] of Object.entries(varProps)) {
-        if (isUndef(typeName))
-          break
+      const varBaseItem = vars[varKey]?.[String(typeName)]
 
-        const tempVarBaseItem = vars[varKey]?.[String(typeName)]
+      if (isUndef(varBaseItem))
+        break
 
-        if (isUndef(tempVarBaseItem))
-          break
-
-        VarsMap.set(varKeyStr, typeNameStr, tempVarBaseItem)
-      }
+      if (isDef(varBaseItem))
+        varsClass.push(varBaseItem[baseKey] ?? '')
     }
-
-    const varBaseItem = VarsMap.get(varKeyStr, typeNameStr)
-    if (isDef(varBaseItem))
-      varsClass.push(varBaseItem[baseKey] ?? '')
 
     return varsClass
   }
