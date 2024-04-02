@@ -1,6 +1,9 @@
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
   extends: ['@commitlint/config-conventional'],
+  rules: {
+    'type-enum': [2, 'always', ['feat', 'perf', 'fix', 'refactor', 'docs', 'build', 'types', 'chore', 'examples', 'test', 'style', 'ci']],
+  },
   prompt: {
     messages: {
       type: '选择你要提交的类型 :',
@@ -22,7 +25,7 @@ module.exports = {
       { value: 'docs', name: '📖 Documentation: 文档', emoji: '📖' },
       { value: 'build', name: '📦 Build: 构建工具', emoji: '📦' },
       { value: 'types', name: '🌊 Types: 类型定义', emoji: '🌊' },
-      { value: 'chore', name: '🏡 Chore: 构建/依赖/工具', emoji: '🏡' },
+      { value: 'chore', name: '🏡 Chore: 简修处理', emoji: '🏡' },
       { value: 'examples', name: '🏀 Examples: 例子展示', emoji: '🏀' },
       { value: 'test', name: '✅ Tests: 测试用例', emoji: '✅' },
       { value: 'style', name: '🎨 Styles: 代码风格', emoji: '🎨' },
