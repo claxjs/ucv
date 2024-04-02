@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/@claxjs/ucv?color=90D26D&labelColor=18181B&label=npm)](https://www.npmjs.com/package/@claxjs/ucv)
 [![NPM downloads](https://img.shields.io/npm/dm/@claxjs/ucv?color=90D26D&labelColor=18181B&label=downloads)](https://www.npmjs.com/package/@claxjs/ucv)
-[![LICENSE](https://img.shields.io/github/license/claxjs/ucv?style=flat&color=90D26D&labelColor=18181B&label=license)](https://www.npmjs.com/package/@claxjs/ucv)
+[![LICENSE](https://img.shields.io/github/license/claxjs/ucv?style=flat&labelColor=18181B&color=90D26D&label=license)](https://www.npmjs.com/package/@claxjs/ucv)
 
 > 一个可以通过组合 工具类(utility classes) 和 属性(props) 生成 可执行工具类变量 的库
 
