@@ -30,9 +30,6 @@ export function ucv<
   combosVars = [],
   defaultProps = {},
 }: UCVOptions<Base, Vars>) {
-  const globalVarProps = defaultProps
-  const globalClassProps: Array<Partial<Base>> = []
-
   const VarsMap = new TwoKeyMap<string, string, Record<string, Clax | undefined>>()
 
   combosVars.forEach((comboVars) => {
@@ -52,16 +49,14 @@ export function ucv<
     })
   })
 
-  const getVarProps = (props: GlobalProps<Base, Vars> | SlotProps<Vars>) => {
+  const genVarPropsFunc = (globalVarProps: Omit<GlobalProps<Base, Vars>, 'class' | 'kuClass'>) => (props: SlotProps<Vars>) => {
     const varProps = omit(props, ['class', 'kuClass'])
 
     return Object.assign({}, globalVarProps, varProps)
   }
 
-  // 基于运行时储存，第一次会生成类，1+使用已生成的类
-  const getPropClass = (props: SlotProps<Vars>, baseKey: string) => {
-    return globalClassProps
-      .map<Clax>(classProp => classProp[baseKey] ?? '')
+  const genPropClassFunc = (globalClassProps: Partial<Base>) => (props: SlotProps<Vars>, baseKey: string) => {
+    return toArray(globalClassProps[baseKey] ?? '')
       .concat(toArray(props.class || ''), toArray(props.kuClass || ''))
   }
 
@@ -98,6 +93,9 @@ export function ucv<
   }
 
   const genBaseSlot = (
+    getVarProps: ReturnType<typeof genVarPropsFunc>,
+    getPropClass: ReturnType<typeof genPropClassFunc>,
+  ) => (
     baseKey: string,
     baseClass: Clax,
   ) => {
@@ -123,20 +121,24 @@ export function ucv<
     if (isEmptyObject(base))
       throw new Error(`[🧀]: "uvc()" must be passed a base as its first argument.`)
 
-    Object.assign(globalVarProps, getVarProps(globalProps))
+    const globalVarProps = {
+      ...omit(globalProps, ['class', 'kuClass']),
+      ...defaultProps,
+    }
 
-    const globalClassProp = Object.assign(
-      {},
-      globalProps.class || {},
-      globalProps.kuClass || {},
-    )
+    const globalClassProp = {
+      ...globalProps.class || {},
+      ...globalProps.kuClass || {},
+    } as Partial<Base>
 
-    globalClassProps.push(globalClassProp)
+    const getVarProps = genVarPropsFunc(globalVarProps)
+
+    const getPropClass = genPropClassFunc(globalClassProp)
 
     const slotEntries = Object
       .entries<Clax>(base)
       .map(([baseKey, baseClass]) =>
-        genBaseSlot(baseKey, baseClass),
+        genBaseSlot(getVarProps, getPropClass)(baseKey, baseClass),
       )
 
     return Object.fromEntries(slotEntries) as Record<keyof Base, BaseSlot<Vars>>
