@@ -3,6 +3,20 @@ import { describe, expect, it } from 'vitest'
 import { ucv } from '../src'
 
 describe('ucv - Single Base Slot', () => {
+  it('basic usage', () => {
+    const clax = ucv({
+      base: {
+        root: 'base-root-style-1',
+        title: 'base-title-style-1',
+      },
+    })
+
+    const { root, title } = clax()
+
+    expect(root()).toBe('base-root-style-1')
+    expect(title()).toBe('base-title-style-1')
+  })
+
   it('string', () => {
     const clax = ucv({
       base: {
@@ -127,7 +141,7 @@ describe('ucv - Global props & Slot props', () => {
     const { root } = clax()
 
     expect(root({ class: 'slot-props-style-1' })).toBe('base-root-style-1 slot-props-style-1')
-    expect(root({ kuClass: 'slot-props-style-1' })).toBe('base-root-style-1 slot-props-style-1')
+    expect(root({ class: 'slot-props-style-1' })).toBe('base-root-style-1 slot-props-style-1')
   })
 
   it('use slot props with multiple slot', () => {
@@ -158,6 +172,6 @@ describe('ucv - Global props & Slot props', () => {
       },
     })
     expect(root({ class: 'slot-props-root-style-1' })).toBe('base-root-style-1 global-props-root-style-1 slot-props-root-style-1')
-    expect(item({ kuClass: 'slot-props-item-style-1' })).toBe('base-item-style-1 slot-props-item-style-1')
+    expect(item({ class: 'slot-props-item-style-1' })).toBe('base-item-style-1 slot-props-item-style-1')
   })
 })
