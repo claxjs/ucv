@@ -13,7 +13,9 @@
     "type": "git",
     "url": "git+https://github.com/claxjs/ucv.git"
   },
-  "bugs": "https://github.com/shikijs/shiki/issues",
+  "bugs": {
+    "url": "https://github.com/claxjs/ucv/issues"
+  },
   "keywords": [
     "utility-class",
     "css",
