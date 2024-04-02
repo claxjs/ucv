@@ -122,8 +122,8 @@ export function ucv<
       throw new Error(`[🧀]: "uvc()" must be passed a base as its first argument.`)
 
     const globalVarProps = {
-      ...omit(globalProps, ['class', 'kuClass']),
       ...defaultProps,
+      ...omit(globalProps, ['class', 'kuClass']),
     }
 
     const globalClassProp = {
