@@ -8,6 +8,12 @@
     "email": "319619193@qq.com"
   },
   "license": "GPL-3.0-only",
+  "homepage": "https://github.com/claxjs/ucv#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claxjs/ucv.git"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
   "keywords": [
     "utility-class",
     "css",
