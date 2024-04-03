@@ -1,5 +1,5 @@
 import {
-  TwoKeyMap,
+  isArray,
   isDef,
   isEmptyObject,
   isObject,
@@ -7,7 +7,6 @@ import {
   omit,
   toArray,
   toClax,
-  toListCombinations,
 } from '../utils'
 
 import type {
@@ -30,25 +29,6 @@ export function ucv<
   combosVars = [],
   defaultProps = {},
 }: UCVOptions<Base, Vars>) {
-  const VarsMap = new TwoKeyMap<string, string, Record<string, Clax | undefined>>()
-
-  combosVars.forEach((comboVars) => {
-    const comboVarProps = omit(comboVars, ['class', 'kuClass'])
-    const comboClassProps = Object.assign(
-      {},
-      comboVars.class || {},
-      comboVars.kuClass || {},
-    )
-
-    const varKeysStr = `${Object.keys(comboVarProps).join('-')}-combos`
-    const typeNamesArr = toListCombinations(Object.values(comboVarProps))
-
-    typeNamesArr.forEach((typeNameArr) => {
-      const typeNameStr = typeNameArr.join('-')
-      VarsMap.set(varKeysStr, typeNameStr, comboClassProps)
-    })
-  })
-
   const genVarPropsFunc = (globalVarProps: Omit<GlobalProps<Base, Vars>, 'class' | 'kuClass'>) => (props: SlotProps<Vars>) => {
     const varProps = omit(props, ['class', 'kuClass'])
 
@@ -80,14 +60,21 @@ export function ucv<
   }
 
   const getCombosClass = (varProps: VarProps<Vars>, baseKey: string) => {
-    const combosClass: Clax = []
+    const combosClass = combosVars.reduce((combosClass: Clax[], comboVars) => {
+      const comboVarProps = omit(comboVars, ['class', 'kuClass'])
+      const comboClassProps = {
+        ...comboVars.class || {},
+        ...comboVars.kuClass || {},
+      }
 
-    const varKeysStr = `${Object.keys(varProps).join('-')}-combos`
-    const typeNamesStr = Object.values(varProps).join('-')
+      const match = Object.entries(comboVarProps).every(([comboVarKey, comboTypeName]) => {
+        const varTypeName = varProps[comboVarKey as keyof Vars]
 
-    const varBaseItem = VarsMap.get(varKeysStr, typeNamesStr)
-    if (isDef(varBaseItem))
-      combosClass.push(varBaseItem[baseKey] ?? '')
+        return isArray(comboTypeName) ? comboTypeName.includes(varTypeName) : comboTypeName === varTypeName
+      })
+
+      return match ? [...combosClass, comboClassProps[baseKey]] : combosClass
+    }, [])
 
     return combosClass
   }

@@ -317,6 +317,9 @@ describe('ucv - Combos With Any Props', () => {
             root: 'vars-size-lg-root-style-1',
           },
         },
+        radius: {
+          none: {},
+        },
       },
       combosVars: [
         {
@@ -338,6 +341,7 @@ describe('ucv - Combos With Any Props', () => {
       defaultProps: {
         color: 'primary',
         size: 'sm',
+        radius: 'none',
       },
     })
 
@@ -348,10 +352,78 @@ describe('ucv - Combos With Any Props', () => {
 
     expect(root({ color: 'secondary', size: 'md' })).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-md-root-style-1 combos-vars-color-secondary-size-md-root-style-1')
   })
+
+  it('when part of props is within combos scope', () => {
+    const clax = ucv({
+      base: {
+        root: 'base-root-style-1',
+      },
+      vars: {
+        color: {
+          primary: {
+            root: 'vars-color-primary-root-style-1',
+          },
+          secondary: {
+            root: 'vars-color-secondary-root-style-1',
+          },
+          success: {
+            root: 'vars-color-success-root-style-1',
+          },
+        },
+        size: {
+          sm: {
+            root: 'vars-size-sm-root-style-1',
+          },
+          md: {
+            root: 'vars-size-md-root-style-1',
+          },
+          lg: {
+            root: 'vars-size-lg-root-style-1',
+          },
+        },
+        radius: {
+          none: {
+            root: 'vars-radius-none-root-style-1',
+          },
+          full: {
+            root: 'vars-radius-full-root-style-1',
+          },
+        },
+      },
+      combosVars: [
+        {
+          color: 'primary',
+          size: 'sm',
+          class: {
+            root: 'combos-vars-color-primary-size-sm-root-style-1',
+          },
+        },
+        {
+          color: 'secondary',
+          size: 'md',
+          class: {
+            root: 'combos-vars-color-secondary-size-md-root-style-1',
+          },
+        },
+      ],
+      defaultProps: {
+        color: 'primary',
+        size: 'sm',
+      },
+    })
+
+    const { root } = clax({
+      color: 'secondary',
+      size: 'md',
+      radius: 'none',
+    })
+
+    expect(root()).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-md-root-style-1 vars-radius-none-root-style-1 combos-vars-color-secondary-size-md-root-style-1')
+  })
 })
 
-describe('ucv - Combos With Override', () => {
-  it('override the same combo', () => {
+describe('ucv - Combos With Same Props', () => {
+  it('merge the same combo', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -404,6 +476,6 @@ describe('ucv - Combos With Override', () => {
 
     const { root } = clax()
 
-    expect(root()).toBe('base-root-style-1 vars-color-primary-root-style-1 vars-size-sm-root-style-1 combos-vars-color-primary-size-sm-root-style-2')
+    expect(root()).toBe('base-root-style-1 vars-color-primary-root-style-1 vars-size-sm-root-style-1 combos-vars-color-primary-size-sm-root-style-1 combos-vars-color-primary-size-sm-root-style-2')
   })
 })
