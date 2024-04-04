@@ -1,7 +1,7 @@
 # ucv - utility class variant
 
 [![NPM version](https://img.shields.io/npm/v/@claxjs/ucv?color=90D26D&labelColor=18181B&label=npm)](https://www.npmjs.com/package/@claxjs/ucv)
-[![NPM downloads](https://img.shields.io/npm/dm/@claxjs/ucv?color=90D26D&labelColor=18181B&label=downloads)](https://www.npmjs.com/package/@claxjs/ucv)
+[![NPM downloads](https://img.shields.io/npm/dw/@claxjs/ucv?color=90D26D&labelColor=18181B&label=downloads)](https://www.npmjs.com/package/@claxjs/ucv)
 [![LICENSE](https://img.shields.io/github/license/claxjs/ucv?style=flat&labelColor=18181B&color=90D26D&label=license)](https://www.npmjs.com/package/@claxjs/ucv)
 
 > 一个可以通过组合 工具类(utility classes) 和 属性(props) 生成 可执行工具类变量 的库
@@ -22,6 +22,7 @@
 - ❓ [WHY](#why)
 - 💜 [致谢](#acknowledgements)
 - 😁 [作者](#author)
+- 💬 [社区](#discussions)
 - ⚖️ [声明](#license)
 
 ## <a name="installation">📦 开始</a>
@@ -36,7 +37,7 @@ pnpm install @claxjs/ucv
 
 细节方面还需要补充 💜
 
-### Slot(插槽)
+### Slices(分片)
 
 ``` javascript
 const clax = ucv({
@@ -112,7 +113,7 @@ const { root } = clax()
  */
 ```
 
-### Combos(组合变量)
+### CombosVars(组合变量)
 
 ``` javascript
 const clax = ucv({
@@ -194,6 +195,10 @@ const { title } = clax({ color: 'secondary', disabled: false })
 ## <a name="author">😁 作者</a>
 
 - sKy ([@Skiyee](https://github.com/skiyee))
+
+## <a name="discussions">💬 社区</a>
+
+- QQ 交流群 ([897784703](https://qm.qq.com/q/4c3Sn0R98Y)]
 
 ## <a name="license">⚖️ 声明</a>
 
