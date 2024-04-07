@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { ucv } from '../src'
 
-describe('ucv - Single Base Slot', () => {
+describe('ucv - Single Base Units', () => {
   it('basic usage', () => {
     const clax = ucv({
       base: {
@@ -52,7 +52,7 @@ describe('ucv - Single Base Slot', () => {
   })
 })
 
-describe('ucv - Multiple Base Slot', () => {
+describe('ucv - Multiple Base Units', () => {
   it('basic', () => {
     const clax = ucv({
       base: {
@@ -96,8 +96,8 @@ describe('ucv - Multiple Base Slot', () => {
   })
 })
 
-describe('ucv - Global props & Slot props', () => {
-  it('use global props with single slot', () => {
+describe('ucv - Global props & Unit props', () => {
+  it('use global props with single units', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -106,14 +106,14 @@ describe('ucv - Global props & Slot props', () => {
 
     const { root } = clax({
       class: {
-        root: 'global-props-style-1 slot-props-style-2',
+        root: 'global-props-style-1 unit-props-style-2',
       },
     })
 
-    expect(root()).toBe('base-root-style-1 global-props-style-1 slot-props-style-2')
+    expect(root()).toBe('base-root-style-1 global-props-style-1 unit-props-style-2')
   })
 
-  it('use global props with multiple slot', () => {
+  it('use global props with multiple units', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -123,15 +123,15 @@ describe('ucv - Global props & Slot props', () => {
 
     const { root, item } = clax({
       class: {
-        root: 'global-props-root-style-1 slot-props-root-style-2',
+        root: 'global-props-root-style-1 unit-props-root-style-2',
       },
     })
 
-    expect(root()).toBe('base-root-style-1 global-props-root-style-1 slot-props-root-style-2')
+    expect(root()).toBe('base-root-style-1 global-props-root-style-1 unit-props-root-style-2')
     expect(item()).toBe('base-item-style-1')
   })
 
-  it('use slot props with single slot', () => {
+  it('use unit props with single units', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -140,11 +140,11 @@ describe('ucv - Global props & Slot props', () => {
 
     const { root } = clax()
 
-    expect(root({ class: 'slot-props-style-1' })).toBe('base-root-style-1 slot-props-style-1')
-    expect(root({ class: 'slot-props-style-1' })).toBe('base-root-style-1 slot-props-style-1')
+    expect(root({ class: 'unit-props-style-1' })).toBe('base-root-style-1 unit-props-style-1')
+    expect(root({ class: 'unit-props-style-1' })).toBe('base-root-style-1 unit-props-style-1')
   })
 
-  it('use slot props with multiple slot', () => {
+  it('use unit props with multiple units', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -154,11 +154,11 @@ describe('ucv - Global props & Slot props', () => {
 
     const { root, item } = clax()
 
-    expect(root({ class: 'slot-props-root-style-1' })).toBe('base-root-style-1 slot-props-root-style-1')
-    expect(item({ class: 'slot-props-item-style-1' })).toBe('base-item-style-1 slot-props-item-style-1')
+    expect(root({ class: 'unit-props-root-style-1' })).toBe('base-root-style-1 unit-props-root-style-1')
+    expect(item({ class: 'unit-props-item-style-1' })).toBe('base-item-style-1 unit-props-item-style-1')
   })
 
-  it('use slot props and global props', () => {
+  it('use unit props and global props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -171,7 +171,7 @@ describe('ucv - Global props & Slot props', () => {
         root: 'global-props-root-style-1',
       },
     })
-    expect(root({ class: 'slot-props-root-style-1' })).toBe('base-root-style-1 global-props-root-style-1 slot-props-root-style-1')
-    expect(item({ class: 'slot-props-item-style-1' })).toBe('base-item-style-1 slot-props-item-style-1')
+    expect(root({ class: 'unit-props-root-style-1' })).toBe('base-root-style-1 global-props-root-style-1 unit-props-root-style-1')
+    expect(item({ class: 'unit-props-item-style-1' })).toBe('base-item-style-1 unit-props-item-style-1')
   })
 })

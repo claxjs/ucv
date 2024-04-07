@@ -288,7 +288,7 @@ describe('ucv - Combos With Any Props', () => {
     expect(root()).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-md-root-style-1 combos-vars-color-secondary-size-md-root-style-1')
   })
 
-  it('with slot props', () => {
+  it('with unit props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',

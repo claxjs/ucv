@@ -40,5 +40,9 @@
     "jsonc",
     "yaml",
     "toml"
+  ],
+  "cSpell.words": [
+    "shikijs",
+    "Twoslash"
   ]
 }

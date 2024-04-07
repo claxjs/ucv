@@ -10,13 +10,13 @@ import {
 } from '../utils'
 
 import type {
-  BaseSlot,
+  BaseUnit,
   Clax,
   GlobalProps,
   OptionBase,
   OptionVars,
-  SlotProps,
   UCVOptions,
+  UnitProps,
   VarProps,
 } from '../types'
 
@@ -29,13 +29,13 @@ export function ucv<
   combosVars = [],
   defaultProps = {},
 }: UCVOptions<Base, Vars>) {
-  const genVarPropsFunc = (globalVarProps: Omit<GlobalProps<Base, Vars>, 'class' | 'kuClass'>) => (props: SlotProps<Vars>) => {
+  const genVarPropsFunc = (globalVarProps: Omit<GlobalProps<Base, Vars>, 'class' | 'kuClass'>) => (props: UnitProps<Vars>) => {
     const varProps = omit(props, ['class', 'kuClass'])
 
     return Object.assign({}, globalVarProps, varProps)
   }
 
-  const genPropClassFunc = (globalClassProps: Partial<Base>) => (props: SlotProps<Vars>, baseKey: string) => {
+  const genPropClassFunc = (globalClassProps: Partial<Base>) => (props: UnitProps<Vars>, baseKey: string) => {
     return toArray(globalClassProps[baseKey] ?? '')
       .concat(toArray(props.class || ''), toArray(props.kuClass || ''))
   }
@@ -79,7 +79,7 @@ export function ucv<
     return combosClass
   }
 
-  const genBaseSlot = (
+  const genBaseUnit = (
     getVarProps: ReturnType<typeof genVarPropsFunc>,
     getPropClass: ReturnType<typeof genPropClassFunc>,
   ) => (
@@ -87,10 +87,10 @@ export function ucv<
     baseClass: Clax,
   ) => {
     // 🚀 Warn: 运行时主要调用体，需要关注性能
-    const baseSlot = (slotProps: SlotProps<Vars> = {}) => {
-      const varProps = getVarProps(slotProps)
+    const baseUnit = (unitProps: UnitProps<Vars> = {}) => {
+      const varProps = getVarProps(unitProps)
 
-      const propClass = getPropClass(slotProps, baseKey)
+      const propClass = getPropClass(unitProps, baseKey)
 
       if (!isObject(vars) || isEmptyObject(vars))
         return toClax(baseClass, propClass)
@@ -101,7 +101,7 @@ export function ucv<
       return toClax(baseClass, varsClass, combosClass, propClass)
     }
 
-    return [baseKey, baseSlot] as const
+    return [baseKey, baseUnit] as const
   }
 
   return (globalProps: GlobalProps<Base, Vars> = {}) => {
@@ -122,12 +122,12 @@ export function ucv<
 
     const getPropClass = genPropClassFunc(globalClassProp)
 
-    const slotEntries = Object
+    const unitEntries = Object
       .entries<Clax>(base)
       .map(([baseKey, baseClass]) =>
-        genBaseSlot(getVarProps, getPropClass)(baseKey, baseClass),
+        genBaseUnit(getVarProps, getPropClass)(baseKey, baseClass),
       )
 
-    return Object.fromEntries(slotEntries) as Record<keyof Base, BaseSlot<Vars>>
+    return Object.fromEntries(unitEntries) as Record<keyof Base, BaseUnit<Vars>>
   }
 }

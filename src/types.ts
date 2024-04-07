@@ -54,8 +54,8 @@ export type GlobalProps<Base, Vars> =
   | VarProps<Vars> & ClassProps<Partial<Base>>
   | ClassProps<Partial<Base>>
 
-export type SlotProps<Vars> =
+export type UnitProps<Vars> =
   | VarProps<Vars> & ClassProps<Clax>
   | ClassProps<Clax>
 
-export type BaseSlot<Vars> = (slotProps?: SlotProps<Vars>) => string
+export type BaseUnit<Vars> = (unitProps?: UnitProps<Vars>) => string

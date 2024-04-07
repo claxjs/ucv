@@ -74,7 +74,7 @@ describe('ucv - Default Props', () => {
     expect(root()).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-sm-root-style-1')
   })
 
-  it('slot props override default props', () => {
+  it('unit props override default props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -114,7 +114,7 @@ describe('ucv - Default Props', () => {
     expect(root({ color: 'secondary' })).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-sm-root-style-1')
   })
 
-  it('slot props override global props and default props', () => {
+  it('unit props override global props and default props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',

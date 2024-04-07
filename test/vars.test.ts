@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { ucv } from '../src'
 
 // TODO: 对于单一变量希望添加语法糖处理
-describe('ucv - Vars With Single Base Slot', () => {
+describe('ucv - Vars With Single Base Units', () => {
   it('basic usage', () => {
     const clax = ucv({
       base: {
@@ -72,7 +72,7 @@ describe('ucv - Vars With Single Base Slot', () => {
     expect(root3()).toBe('base-root-style-1 global-props-root-style-1')
   })
 
-  it('with slot props', () => {
+  it('with unit props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -108,11 +108,11 @@ describe('ucv - Vars With Single Base Slot', () => {
     expect(root()).toBe('base-root-style-1')
     expect(root({ color: 'primary' })).toBe('base-root-style-1 vars-color-primary-root-style-1')
     expect(root({ color: 'primary', size: 'sm' })).toBe('base-root-style-1 vars-color-primary-root-style-1 vars-size-sm-root-style-1')
-    expect(root({ color: 'primary', class: 'slot-props-root-style-1' })).toBe('base-root-style-1 vars-color-primary-root-style-1 slot-props-root-style-1')
+    expect(root({ color: 'primary', class: 'unit-props-root-style-1' })).toBe('base-root-style-1 vars-color-primary-root-style-1 unit-props-root-style-1')
   })
 })
 
-describe('ucv - Vars With Multiple Base Slot', () => {
+describe('ucv - Vars With Multiple Base Units', () => {
   it('with global props', () => {
     const clax = ucv({
       base: {
@@ -151,7 +151,7 @@ describe('ucv - Vars With Multiple Base Slot', () => {
     expect(item()).toBe('base-item-style-1 vars-isBig-true-item-style-1')
   })
 
-  it('with slot props', () => {
+  it('with unit props', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -183,14 +183,14 @@ describe('ucv - Vars With Multiple Base Slot', () => {
     expect(root({ isBig: true, color: 'red' })).toBe('base-root-style-1 vars-color-red-root-style-1')
     expect(root({ isBig: false, color: 'blue' })).toBe('base-root-style-1 vars-isBig-false-item-style-1 vars-color-blue-root-style-1')
 
-    expect(item({ class: 'slot-props-root-style-1' })).toBe('base-item-style-1 slot-props-root-style-1')
+    expect(item({ class: 'unit-props-root-style-1' })).toBe('base-item-style-1 unit-props-root-style-1')
     expect(item({ isBig: true, color: 'red' })).toBe('base-item-style-1 vars-isBig-true-item-style-1')
     expect(item({ isBig: false, color: 'blue' })).toBe('base-item-style-1')
   })
 })
 
-describe('ucv - Vars with Global props & Slot props', () => {
-  it('use global props with single slot', () => {
+describe('ucv - Vars with Global props & Unit props', () => {
+  it('use global props with single units', () => {
     const clax = ucv({
       base: {
         root: 'base-root-style-1',
@@ -312,6 +312,6 @@ describe('ucv - Vars with Global props & Slot props', () => {
     })
 
     expect(root({ color: 'secondary', size: 'sm' })).toBe('base-root-style-1 vars-color-secondary-root-style-1 vars-size-sm-root-style-1 global-props-root-style-1')
-    expect(root({ class: 'slot-props-root-style-1' })).toBe('base-root-style-1 vars-color-primary-root-style-1 vars-size-md-root-style-1 global-props-root-style-1 slot-props-root-style-1')
+    expect(root({ class: 'unit-props-root-style-1' })).toBe('base-root-style-1 vars-color-primary-root-style-1 vars-size-md-root-style-1 global-props-root-style-1 unit-props-root-style-1')
   })
 })
