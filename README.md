@@ -4,7 +4,7 @@
 [![NPM downloads](https://img.shields.io/npm/dw/@claxjs/ucv?color=90D26D&labelColor=18181B&label=downloads)](https://www.npmjs.com/package/@claxjs/ucv)
 [![LICENSE](https://img.shields.io/github/license/claxjs/ucv?style=flat&labelColor=18181B&color=90D26D&label=license)](https://www.npmjs.com/package/@claxjs/ucv)
 
-> 一个可以通过组合 工具类(utility classes) 和 属性(props) 生成 可执行工具类变量 的库
+> 工具类(utility classes) 和 属性(props) 的最佳拍档
 
 ## 🚀 功能
 
@@ -16,14 +16,18 @@
 
 ## 📂 目录
 
+- 💬 [社区](#discussions)
 - 📦 [安装](#installation)
 - 🎯 [使用](#usage)
 - 👀 [待办](#todo)
 - ❓ [WHY](#why)
 - 💜 [致谢](#acknowledgements)
 - 😁 [作者](#author)
-- 💬 [社区](#discussions)
 - ⚖️ [声明](#license)
+
+## <a name="discussions">💬 社区</a>
+
+- QQ 交流群 ([897784703](https://qm.qq.com/q/4c3Sn0R98Y)]
 
 ## <a name="installation">📦 开始</a>
 
@@ -33,9 +37,7 @@ pnpm install @claxjs/ucv
 
 ## <a name="usage">🎯 使用</a>
 
-会不断添加详细使用文档，目前只是基础使用部分(若方便的话，朋友们可以先看测试用例)
-
-细节方面还需要补充 💜
+文档已经完成了90%的内容，就等待网站上线了 💜
 
 ### Slices(分片)
 
@@ -195,10 +197,6 @@ const { title } = clax({ color: 'secondary', disabled: false })
 ## <a name="author">😁 作者</a>
 
 - sKy ([@Skiyee](https://github.com/skiyee))
-
-## <a name="discussions">💬 社区</a>
-
-- QQ 交流群 ([897784703](https://qm.qq.com/q/4c3Sn0R98Y)]
 
 ## <a name="license">⚖️ 声明</a>
 
