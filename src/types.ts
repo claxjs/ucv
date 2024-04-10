@@ -14,7 +14,9 @@ export interface OptionVars<
   Base extends OptionBase = Record<string, never>,
 > {
   [VarKey: string]: {
-    [TypeName: string]: Partial<Base>
+    [TypeName: string]: {
+      [BaseKey in keyof Base]?: Clax
+    }
   }
 }
 
