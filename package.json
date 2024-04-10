@@ -44,7 +44,9 @@
     "release": "pnpm test && pnpm build && bumpp",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "docs:dev": "pnpm -C docs run docs:dev",
+    "docs:build": "pnpm -C docs run docs:build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.11.6",

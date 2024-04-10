@@ -1,6 +1,10 @@
 # Dependencies
 node_modules
 
+# Doc
+docs/.vitepress/dist
+docs/.vitepress/cache
+
 # Setting
 
 # Build Outputs
