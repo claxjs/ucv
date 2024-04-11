@@ -1,7 +1,7 @@
 {
   "name": "@claxjs/ucv",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "一个可以通过组合 工具类(utility classes) 和 属性(props) 生成 可执行工具类变量 的库",
   "author": {
     "name": "sKy",
