@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 
 import { qq } from '../public/icon'
+import { version } from '../../package.json'
 import vite from './vite.config'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
@@ -18,6 +19,11 @@ const FEATURE: DefaultTheme.NavItemWithLink[] = [
   { text: '组合变量(CombosVars)', link: '/feature/combosVars' },
 ]
 
+const VERSION: DefaultTheme.NavItemWithLink[] = [
+  { text: '发布日志', link: 'https://github.com/claxjs/ucv/releases' },
+  { text: '参与贡献', link: 'https://github.com/claxjs/ucv/blob/main/.github/CONTRIBUTING.md' },
+]
+
 const INTEGRATION: DefaultTheme.NavItemWithLink[] = [
   { text: 'Uno', link: '/integration/uno' },
   { text: 'Tailwind', link: '/integration/tailwind' },
@@ -27,6 +33,7 @@ const Nav: DefaultTheme.NavItem[] = [
   { text: '指南', items: GUIDES },
   { text: '功能', items: FEATURE },
   { text: '集成', items: INTEGRATION },
+  { text: `v${version}`, items: VERSION },
 ]
 
 const SidebarGuide: DefaultTheme.SidebarItem[] = [
@@ -54,15 +61,29 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.svg',
+
     search: {
       provider: 'local',
       options: {
         translations: {
           button: {
             buttonText: '搜索文档',
+            buttonAriaLabel: '搜索文档',
+          },
+          modal: {
+            resetButtonTitle: '清除查询',
+            noResultsText: '找不到结果',
+            backButtonTitle: '返回',
+            displayDetails: '显示详情',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭',
+            },
           },
         },
       },
+
     },
 
     nav: Nav,
@@ -72,11 +93,29 @@ export default defineConfig({
       { icon: { svg: qq }, link: 'https://qm.qq.com/q/4c3Sn0R98Y' },
     ],
 
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '菜单',
+    darkModeSwitchLabel: '主题',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+
+    outline: {
+      label: '页面导航',
+    },
+
     sidebar: Sidebar,
 
     editLink: {
       pattern: 'https://github.com/claxjs/ucv/edit/main/docs/:path',
       text: '对本页提出修改建议',
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'medium',
+      },
     },
 
     docFooter: {
